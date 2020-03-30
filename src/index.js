@@ -1,59 +1,64 @@
 import _ from 'lodash';
-import Icon from './images/carbon.png';
 import './css/main.css';
-
 import * as Three from 'three';
+import Icon from './images/carbon.png';
+
+//Import modules:
+import Animation from './modules/Animation';
 
 
-let scene, camera, renderer, cube;
+const animation = new Animation();
+animation.animate();
 
-function init() {
-    scene = new Three.Scene();
+// let scene, camera, renderer, cube;
 
-    camera = new Three.PerspectiveCamera(
-        75, 
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
+// function init() {
+//     scene = new Three.Scene();
 
-    renderer = new Three.WebGLRenderer({
-        antialias: true
-    });
+//     camera = new Three.PerspectiveCamera(
+//         75, 
+//         window.innerWidth / window.innerHeight,
+//         0.1,
+//         1000
+//     );
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+//     renderer = new Three.WebGLRenderer({
+//         antialias: true
+//     });
 
-    document.body.appendChild(renderer.domElement);
+//     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const geometry = new Three.BoxGeometry( 2, 2, 2 );
-    const texture = new Three.TextureLoader().load(Icon);
+//     document.body.appendChild(renderer.domElement);
 
-    const material = new Three.MeshBasicMaterial( {map: texture} );
-    cube = new Three.Mesh( geometry, material );
-    scene.add( cube );
+//     const geometry = new Three.BoxGeometry( 2, 2, 2 );
+//     const texture = new Three.TextureLoader().load(Icon);
 
-    camera.position.z = 5;
-}
+//     const material = new Three.MeshBasicMaterial( {map: texture} );
+//     cube = new Three.Mesh( geometry, material );
+//     scene.add( cube );
 
-function animate() {
-    requestAnimationFrame(animate);
+//     camera.position.z = 5;
+// }
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+// function animate() {
+//     requestAnimationFrame(animate);
 
-    renderer.render(scene, camera);
-}
+//     cube.rotation.x += 0.01;
+//     cube.rotation.y += 0.01;
 
-function onWindowResize () {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
+//     renderer.render(scene, camera);
+// }
 
-window.addEventListener('resize', onWindowResize, false);
+// function onWindowResize () {
+//     camera.aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
+//     renderer.setSize(window.innerWidth, window.innerHeight);
+// }
 
-init();
-animate();
+// window.addEventListener('resize', onWindowResize, false);
+
+// init();
+// animate();
 
 
 
