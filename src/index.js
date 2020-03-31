@@ -10,6 +10,13 @@ import Animation from './modules/Animation';
 const animation = new Animation();
 animation.animate();
 
+const header = document.createElement('h1');
+const body = document.querySelector('body');
+body.appendChild(header);
+
+header.innerHTML = 'HELLLO WORLD';
+header.setAttribute('class', 'heading');
+
 // let scene, camera, renderer, cube;
 
 // function init() {
