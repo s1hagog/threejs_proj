@@ -7,9 +7,9 @@ export default class Animation {
 
         this.scene = new Three.Scene();
         this.camera = new Three.PerspectiveCamera(
-            75, 
+            60, 
             window.innerWidth / window.innerHeight,
-            0.1,
+            1,
             1000
         );
         this.renderer = new Three.WebGLRenderer({
@@ -22,11 +22,20 @@ export default class Animation {
         this.material = new Three.MeshBasicMaterial( {map: this.texture} );
         this.cube = new Three.Mesh( this.geometry, this.material );
 
+        //Ambient light
+        this.ambient = new Three.AmbientLight(0x555555);
+        this.scene.add(this.ambient);
+
+        //Scene Fog
+        this.scene.fog = new Three.FogExp2(0x03544e, 0.001);
+        this.scene.add( this.cube );
+        this.camera.position.z = 5;
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
-        this.scene.add( this.cube );
-        this.camera.position.z = 5;
+        this.renderer.setClearColor(this.scene.fog.color);
+        
+        
 
 
         //add events listeners

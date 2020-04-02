@@ -5,9 +5,11 @@ import Icon from './images/carbon.png';
 
 //Import modules:
 import Animation from './modules/Animation';
+import AnimationBackground from './modules/AnimatedBackground';
 
 
-const animation = new Animation();
+const animation = new AnimationBackground();
+// const animation = new Animation();
 animation.animate();
 
 const header = document.createElement('h1');
