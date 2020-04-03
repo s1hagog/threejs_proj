@@ -8,14 +8,14 @@ export default class AnimatedBackground {
         this.height = window.innerHeight;
 
         this.scene = new Three.Scene;
-        this.camera = new Three.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 50 );
+        this.camera = new Three.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 
         this.positionCamera({
-            z: 5
+            z: 1
         }, {
             x: 1.16,
             y: -0.12,
-            z: 0.27
+            z: 0.27,
         });
 
         // console.log(this.camera.position.)
@@ -37,37 +37,29 @@ export default class AnimatedBackground {
 
         this.texture = new Three.TextureLoader().load(smoke);
 
-        this.cloudGeo = new Three.PlaneBufferGeometry(30,1000);
+        this.cloudGeo = new Three.PlaneBufferGeometry(500,500);
         this.cloudMaterial = new Three.MeshLambertMaterial({
             map: this.texture,
-            transparent: false
+            transparent: true
         });
 
-        for(let i=0; i<1; i++){
+        for(let i=0; i<50; i++){
             this.cloud = new Three.Mesh(this.cloudGeo, this.cloudMaterial);
-            // this.cloud.position.set(
-            //     Math.random()*800-400,
-            //     500,
-            //     Math.random()*500-500
-            // )
-            // this.cloud.rotation.set(
-            //     1.16,
-            //     -0.12,
-            //     Math.random()*2*Math.PI
-            // );
+            this.cloud.position.set(
+                Math.random()*800-400,
+                500,
+                Math.random()*500-500
+            )
+            this.cloud.rotation.set(
+                1.16,
+                -0.12,
+                Math.random()*2*Math.PI
+            );
             this.cloud.material.opacity = 1;
-            // this.scene.add(this.cloud);
+            this.scene.add(this.cloud);
         }
 
         console.log(this.cloud);
-
-
-        //TESTING
-
-        this.geometry = new Three.PlaneBufferGeometry( 5, 20, 32 );
-        this.material = new Three.MeshBasicMaterial( {color: 0xffff00, side: Three.DoubleSide} );
-        this.plane = new Three.Mesh( this.geometry, this.material );
-        this.scene.add( this.plane );
 
         // this.loader = new Three.TextureLoader();
         // this.loader.load(smoke, texture => {

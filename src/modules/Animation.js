@@ -28,8 +28,13 @@ export default class Animation {
 
         //Scene Fog
         this.scene.fog = new Three.FogExp2(0x03544e, 0.001);
-        this.scene.add( this.cube );
+        // this.scene.add( this.cube );
         this.camera.position.z = 5;
+
+        this.geometry = new Three.PlaneBufferGeometry( 5, 20, 32 );
+        this.material = new Three.MeshBasicMaterial( {color: 0xffff00, side: Three.DoubleSide} );
+        this.plane = new Three.Mesh( this.geometry, this.material );
+        this.scene.add( this.plane );
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
