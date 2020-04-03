@@ -6,6 +6,7 @@ export default class AnimatedBackground {
     constructor() {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
+        this.cloudParticles = [];
 
         this.scene = new Three.Scene;
         this.camera = new Three.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -22,6 +23,23 @@ export default class AnimatedBackground {
 
         this.ambient = new Three.AmbientLight(0x555555);
         this.scene.add(this.ambient);
+
+        //Directional Light
+        this.directionalLight = new Three.DirectionalLight(0xff8c19);
+        this.directionalLight.position.set(0,0,1);
+        this.scene.add(this.directionalLight);
+
+
+        //Point Lights
+        this.orangeLight = new Three.PointLight(0xcc6600, 50, 450, 1.7);
+        this.orangeLight.position.set(200,300,100);
+        this.scene.add(this.orangeLight);
+        this.redLight = new Three.PointLight(0xd8547e, 50, 450, 1.7);
+        this.redLight.position.set(100,300,100);
+        this.scene.add(this.redLight);
+        this.blueLight = new Three.PointLight(0x3677ac, 50, 450, 1.7);
+        this.blueLight.position.set(300,300,200);
+        this.scene.add(this.blueLight);
 
         this.renderer = new Three.WebGLRenderer({
             antialias: true
@@ -55,38 +73,20 @@ export default class AnimatedBackground {
                 -0.12,
                 Math.random()*2*Math.PI
             );
-            this.cloud.material.opacity = 1;
+            this.cloud.material.opacity = 0.55;
+            this.cloudParticles.push(this.cloud);
             this.scene.add(this.cloud);
         }
 
-        console.log(this.cloud);
-
-        // this.loader = new Three.TextureLoader();
-        // this.loader.load(smoke, texture => {
-        //     let cloudGeo = new Three.PlaneBufferGeometry(500,500);
-        //     let cloudMaterial = new Three.MeshLambertMaterial({
-        //         map: texture,
-        //         transparent: true
-        //     });
-
-        //     for(let i=0; i<50; i++){
-        //         let cloud = new Three.Mesh(cloudGeo, cloudMaterial);
-        //         cloud.position.set(
-        //             Math.random()*800-400,
-        //             500,
-        //             Math.random()*500-500
-        //         )
-        //         cloud.rotation.x = 1.16;
-        //         cloud.rotation.y = -0.12;
-        //         cloud.rotation.z = Math.random()*2*Math.PI;
-        //         cloud.material.opacity = 0.55;
-        //         this.scene.add(cloud);
-        //     }
-        // })
         this.events();
     }
 
     animate() {
+
+        this.cloudParticles.forEach(p => {
+            p.rotation.z -= 0.001;
+            // p.position.y -= 2;
+        })
 
         this.renderer.render(this.scene, this.camera);
         requestAnimationFrame(this.animate.bind(this));
