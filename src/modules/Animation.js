@@ -46,6 +46,7 @@ export default class Animation {
         //add events listeners
 
         this.events();
+
     }
 
     animate() {
