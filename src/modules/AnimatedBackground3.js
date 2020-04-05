@@ -17,7 +17,7 @@ export default class AnimatedBackground3 {
         //Portal Light
 
         this.portalLight = new Three.PointLight(0x062d89, 30, 350, 1.7);
-        this.portalLight.position.set(110,110,500);
+        this.portalLight.position.set(30,-121,25);
         this.scene.add(this.portalLight);
 
         //Camera
@@ -37,7 +37,8 @@ export default class AnimatedBackground3 {
 
         this.particleSetup();
 
-        console.log(this.particles[0].position);
+        console.log(this.particles.length)
+        console.log(this.particles[this.particles.length - 1].position);
     }
 
     particleSetup() {
@@ -60,6 +61,7 @@ export default class AnimatedBackground3 {
             this.particles.push(particle);
             this.scene.add(particle);
         }
+
 
         this.clock = new Three.Clock();
         

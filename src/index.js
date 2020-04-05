@@ -9,10 +9,10 @@ import AnimationBackground from './modules/AnimatedBackground';
 import AnimationBackground2 from './modules/AnimatedBackground2';
 import AnimationBackground3 from './modules/AnimatedBackground3';
 
-const animation = new AnimationBackground();
+// const animation = new AnimationBackground();
 // const animation = new Animation();
 // const animation = new AnimationBackground2();
-// const animation = new AnimationBackground3();
+const animation = new AnimationBackground3();
 animation.animate();
 
 const header = document.createElement('h1');
